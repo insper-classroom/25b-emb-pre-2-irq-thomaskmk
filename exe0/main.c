@@ -36,7 +36,6 @@ int main() {
                                      &btn_callback);
 
   volatile int capture_flag = 0;
-  int a;
   while (1) {
     if (btn_flag) {
       capture_flag = 1;
