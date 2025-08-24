@@ -12,7 +12,6 @@ int volatile btn_flag;
 
 void btn_callback(uint gpio, uint32_t events) {
   if (events == 0x4) { // fall edge
-    sleep_ms(1);
     btn_flag = 1;
   }
 }
