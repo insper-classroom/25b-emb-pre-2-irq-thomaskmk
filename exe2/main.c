@@ -6,6 +6,7 @@ const int LED_PIN = 4;
 const int BTN_PIN = 28;
 
 volatile int flag = 0;
+int led_state = 0;
 
 void btn_callback(uint gpio, uint32_t events) {
   if (events == 0x4) {
@@ -27,15 +28,16 @@ int main() {
     BTN_PIN, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true, &btn_callback);
 
   while (true) {
-    /* printf("Estado: %d", gpio_get(LED_PIN)); */
-    if (flag && gpio_get(LED_PIN) == 1) {
-      gpio_put(LED_PIN, 0);
+    if (flag) {
+      if (led_state) {
+        gpio_put(LED_PIN, 0);
+        led_state = 0;
+      }
+      else {
+        gpio_put(LED_PIN, 1);
+        led_state = 1;
+      }
       flag = 0;
     }
-    else if (flag && !gpio_get(LED_PIN)){
-      gpio_put(LED_PIN, 1);
-      flag = 0;
-    }
-
   }
 }
