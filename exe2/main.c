@@ -6,7 +6,6 @@ const int LED_PIN = 4;
 const int BTN_PIN = 28;
 
 volatile int flag = 0;
-int led_state = 0;
 
 void btn_callback(uint gpio, uint32_t events) {
   if (events == 0x4) {
@@ -15,6 +14,7 @@ void btn_callback(uint gpio, uint32_t events) {
 }
 
 int main() {
+  int led_state = 0;
   stdio_init_all();
 
   gpio_init(BTN_PIN);
