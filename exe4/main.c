@@ -14,7 +14,6 @@ void btn_callback(uint gpio, uint32_t events)
 {
     if (events == 0x4)
     {
-        printf("entrou callback");
         if (gpio == BTN_PIN_R)
         {
             flag_r = 1;
