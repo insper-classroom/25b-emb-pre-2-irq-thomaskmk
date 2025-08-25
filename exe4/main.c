@@ -67,7 +67,6 @@ int main()
                 gpio_put(LED_PIN_R, 1);
                 led_state_r = 1;
             }
-            printf("entrou main");
             flag_r = 0;
         }
 

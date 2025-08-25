@@ -19,7 +19,7 @@ void btn_callback(uint gpio, uint32_t events) {
 }
 
 int main() {
-    int64_t micros;
+    uint32_t ms;
     stdio_init_all();
 
     gpio_init(BTN_PIN);
@@ -34,16 +34,14 @@ int main() {
     
     while (true) {
         if (flag_fall) {
-            absolute_time_t press = get_absolute_time();
-            micros = to_us_since_boot(press);
+            ms = to_ms_since_boot(get_absolute_time());
 
             flag_fall = 0;
         }
         else if (flag_rise == 1) {
-            absolute_time_t release = get_absolute_time();
-            int64_t micros_release = to_us_since_boot(release);
+            uint32_t ms_release = to_ms_since_boot(get_absolute_time());
 
-            int64_t duration_ms = (micros_release - micros) * 0.001;
+            uint32_t duration_ms = (ms_release - ms);
 
             if (duration_ms > 800) {
                 printf("Aperto longo!\n");
